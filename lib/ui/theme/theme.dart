@@ -30,6 +30,11 @@ class ThemeAKasa {
       fontWeight: FontWeight.w700,
       color: Colors.black,
     ),
+    headline4: GoogleFonts.inter(
+      fontSize: 14,
+      fontWeight: FontWeight.w700,
+      color: Colors.black,
+    ),
     bodyText1: GoogleFonts.inter(
       fontSize: 16,
       fontWeight: FontWeight.w400,
