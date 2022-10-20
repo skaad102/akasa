@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AKasa {
+class ThemeAKasa {
   static const Color btnBackground = Color(0xFFA2DF30);
   static const Color btnPlay = Color(0xFF56b82c);
   static const Color btnZone = Color(0xFFf8ffea);
@@ -15,42 +15,42 @@ class AKasa {
   static const Color btnPerfil = Color(0xFF35ddb6);
   static const Color btnBorderPerfil = Color(0xFF0d4a3c);
   static TextTheme lightTextTheme = TextTheme(
-    headline1: GoogleFonts.anton(
+    headline1: GoogleFonts.inter(
       fontSize: 32,
       fontWeight: FontWeight.w700,
       color: Colors.black,
     ),
-    headline2: GoogleFonts.anton(
+    headline2: GoogleFonts.inter(
       fontSize: 24,
       fontWeight: FontWeight.w700,
       color: Colors.black,
     ),
-    headline3: GoogleFonts.anton(
+    headline3: GoogleFonts.inter(
       fontSize: 20,
       fontWeight: FontWeight.w700,
       color: Colors.black,
     ),
-    bodyText1: GoogleFonts.openSans(
+    bodyText1: GoogleFonts.inter(
       fontSize: 16,
       fontWeight: FontWeight.w400,
       color: Colors.black,
     ),
-    bodyText2: GoogleFonts.openSans(
+    bodyText2: GoogleFonts.inter(
       fontSize: 14,
       fontWeight: FontWeight.w400,
       color: Colors.black,
     ),
-    button: GoogleFonts.openSans(
+    button: GoogleFonts.inter(
       fontSize: 14,
       fontWeight: FontWeight.w700,
       color: Colors.black,
     ),
-    caption: GoogleFonts.openSans(
+    caption: GoogleFonts.inter(
       fontSize: 12,
       fontWeight: FontWeight.w400,
       color: Colors.black,
     ),
-    overline: GoogleFonts.openSans(
+    overline: GoogleFonts.inter(
       fontSize: 10,
       fontWeight: FontWeight.w400,
       color: Colors.black,
@@ -74,6 +74,10 @@ class AKasa {
           thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 12.0),
           overlayColor: Colors.green.withAlpha(32),
           overlayShape: const RoundSliderOverlayShape(overlayRadius: 28.0),
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: btnPlay,
+          foregroundColor: Colors.white,
         ),
       );
 }
