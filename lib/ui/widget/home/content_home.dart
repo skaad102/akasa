@@ -64,7 +64,9 @@ class _ContentHomeState extends State<ContentHome> {
               max: 100,
               onChanged: changeSlider,
             ),
-            BtnContinuar(),
+            BtnContinuar(
+              text: 'Comenzar',
+            ),
           ],
         ),
       ),
