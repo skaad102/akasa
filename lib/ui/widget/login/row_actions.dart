@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../theme/theme.dart';
 import '../btn_actions.dart';
@@ -32,7 +33,19 @@ class RowBtnActions extends StatelessWidget {
           textColor: ThemeAKasa.btnBorderHear,
           textAction: "Te Escucho",
           icon: Icons.mic,
-          onAction: () => print("Te Escucho"),
+          onAction: () async {
+            final status = await Permission.microphone.request();
+            switch (status) {
+              case PermissionStatus.granted:
+                print("Te Escucho");
+                break;
+              case PermissionStatus.denied:
+              case PermissionStatus.permanentlyDenied:
+              case PermissionStatus.restricted:
+              case PermissionStatus.limited:
+                openAppSettings();
+            }
+          },
         ),
         BtnAction(
           backgroundColor: ThemeAKasa.btnPerfil,
@@ -43,5 +56,9 @@ class RowBtnActions extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void permiso() {
+    print("Permiso");
   }
 }

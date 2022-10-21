@@ -45,14 +45,16 @@ class DatosFormulario extends StatelessWidget {
           child: Column(children: [
         InputForm(
           controlerInput: controlerInputTelefono,
-          hintText: 'Telefono',
+          hintText: 'Número de Telefono',
           icon: Icons.phone_android_outlined,
+          maxLength: 10,
         ),
         const SizedBox(height: 8),
         InputForm(
             controlerInput: controlerInputPin,
-            hintText: 'PIN max 4',
+            hintText: 'PIN máximo 4 numeros',
             icon: Icons.lock,
+            maxLength: 4,
             obscureText: true),
       ])),
     );
@@ -64,11 +66,13 @@ class InputForm extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final bool obscureText;
+  final int maxLength;
   const InputForm({
     Key? key,
     required this.controlerInput,
     required this.hintText,
     required this.icon,
+    required this.maxLength,
     this.obscureText = false,
   }) : super(key: key);
 
@@ -84,10 +88,10 @@ class InputForm extends StatelessWidget {
         ),
       ),
       child: TextFormField(
+        // maxLength: maxLength,
         onChanged: (value) => print(value),
         keyboardType: TextInputType.number,
         obscureText: obscureText,
-        // maxLength: 4,
         controller: controlerInput,
         decoration: InputDecoration(
           icon: Icon(icon),
