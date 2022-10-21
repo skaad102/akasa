@@ -14,9 +14,14 @@ es necesario tener acceso a microfono e internet Android
 `$ android.enableJetifier=true`
 
 > android {
-> compileSdkVersion 31
+> compileSdkVersion 28
 > ...
 > }
+
+> defaultConfig {
+> minSdkVersion 21
+>...
+>}
 
 ## permisos andorid Manifest
 
