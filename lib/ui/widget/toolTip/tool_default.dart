@@ -30,8 +30,8 @@ class myTooltipDefault extends StatelessWidget {
               Image(
                 image: AssetImage("assets/img/img1.png"),
                 width: 300,
-                height: height <= 100 ? 100 : height,
-                fit: BoxFit.cover,
+                height: height <= 150 ? 150 : height,
+                fit: BoxFit.fill,
               ),
               Container(
                   width: 300,
