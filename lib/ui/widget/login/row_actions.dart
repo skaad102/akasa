@@ -7,12 +7,29 @@ import '../../model/app_state_manager.dart';
 import '../../theme/theme.dart';
 import '../btn_actions.dart';
 
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+
 /* Botones para las diferentes acciones en la aplicacion en la vista login */
-class RowBtnActions extends StatelessWidget {
+class RowBtnActions extends StatefulWidget {
   const RowBtnActions({super.key});
 
   @override
+  State<RowBtnActions> createState() => _RowBtnActionsState();
+}
+
+class _RowBtnActionsState extends State<RowBtnActions> {
+  var _spechText = stt.SpeechToText();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _spechText = stt.SpeechToText();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppStateManager>(context, listen: false);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -35,8 +52,7 @@ class RowBtnActions extends StatelessWidget {
           textColor: ThemeAKasa.btnBorderHear,
           textAction: getIconTxt(context),
           icon: getIconMic(context),
-          onAction: () =>
-              Provider.of<AppStateManager>(context, listen: false).toggleMic(),
+          onAction: () => listenToMe(appState.isMicOn, context),
         ),
         BtnAction(
           backgroundColor: ThemeAKasa.btnPerfil,
@@ -47,6 +63,38 @@ class RowBtnActions extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void listenToMe(bool micOn, BuildContext context) async {
+    final appState = Provider.of<AppStateManager>(context, listen: false);
+    appState.toggleMic();
+    final micOn = appState.isMicOn;
+    String text = appState.vozToText;
+    if (!micOn) {
+      bool available = await _spechText.initialize(
+        // onStatus: (val) => print('onStatus: $val'),
+        onStatus: (val) {
+          setState(() {
+            if (val == 'notListening' || val == 'done') {
+              appState.toggleMic();
+            }
+          });
+        },
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        _spechText.listen(
+          cancelOnError: true,
+          onResult: (val) => setState(() {
+            text = val.recognizedWords;
+            appState.setVozToText(text);
+          }),
+        );
+      }
+    } else {
+      _spechText.stop();
+      // text = "";
+    }
   }
 
   IconData getIconMic(BuildContext context) {

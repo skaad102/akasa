@@ -2,15 +2,25 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class AppStateManager extends ChangeNotifier {
   bool _initialized = false;
   bool _loggedIn = false;
   bool _micOn = false;
+  String _vozToText = "";
+
+  late stt.SpeechToText _speech;
 
   bool get isInitialized => _initialized;
   bool get isLoggedIn => _loggedIn;
   bool get isMicOn => _micOn;
+  String get vozToText => _vozToText;
+
+  void setVozToText(String text) {
+    _vozToText = text;
+    notifyListeners();
+  }
 
   /// It waits for 2 seconds and then sets the _initialized variable to true.
   /// This is just to simulate a loading screen.
@@ -48,7 +58,9 @@ class AppStateManager extends ChangeNotifier {
     final status = await Permission.microphone.request();
     switch (status) {
       case PermissionStatus.granted:
+        // _speech = stt.SpeechToText();
         toggleMicOnOff();
+        // _listen();
         break;
       case PermissionStatus.denied:
       case PermissionStatus.permanentlyDenied:
@@ -62,4 +74,25 @@ class AppStateManager extends ChangeNotifier {
     _micOn = !_micOn;
     notifyListeners();
   }
+
+//   void _listen() async {
+//     String _lastWords = "";
+//     if (_micOn) {
+//       bool available = await _speech.initialize(
+//         onStatus: (val) => print('onStatus: $val'),
+//         onError: (val) => print('onError: $val'),
+//       );
+//       if (available) {
+//         _speech.listen(
+//           cancelOnError: true,
+//           onResult: (val) => () {
+//             _lastWords = val.recognizedWords;
+//             print({val, val.recognizedWords});
+//           },
+//         );
+//       }
+//     } else {
+//       _speech.stop();
+//     }
+//   }
 }
