@@ -6,12 +6,14 @@ class BtnAction extends StatelessWidget {
   Color backgroundColor;
   Color textColor;
   IconData icon;
+  Function onAction;
   // TODO:add function to execute
   BtnAction(
       {required this.textAction,
       required this.backgroundColor,
       required this.textColor,
       required this.icon,
+      required this.onAction,
       super.key});
 
   @override
@@ -20,8 +22,8 @@ class BtnAction extends StatelessWidget {
       width: 80,
       height: 105,
       child: Column(children: [
-        InkWell(
-          onTap: () {},
+        GestureDetector(
+          onTap: () => onAction(),
           child: Container(
             width: 69,
             height: 69,

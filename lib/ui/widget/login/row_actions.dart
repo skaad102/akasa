@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../theme/theme.dart';
 import '../btn_actions.dart';
@@ -17,24 +18,28 @@ class RowBtnActions extends StatelessWidget {
           textColor: ThemeAKasa.btnBorderBack,
           textAction: "Atrás",
           icon: Icons.play_arrow_rounded,
+          onAction: () => context.go('/'),
         ),
         BtnAction(
           backgroundColor: ThemeAKasa.btnSpeak,
           textColor: ThemeAKasa.btnBorderSpeak,
           textAction: "Leo por ti",
           icon: Icons.speaker,
+          onAction: () => print("Leo por ti"),
         ),
         BtnAction(
           backgroundColor: ThemeAKasa.btnHear,
           textColor: ThemeAKasa.btnBorderHear,
           textAction: "Te Escucho",
           icon: Icons.mic,
+          onAction: () => print("Te Escucho"),
         ),
         BtnAction(
           backgroundColor: ThemeAKasa.btnPerfil,
           textColor: ThemeAKasa.btnBorderPerfil,
           textAction: "Perfil",
           icon: Icons.person,
+          onAction: () => print("Perfil"),
         ),
       ],
     );

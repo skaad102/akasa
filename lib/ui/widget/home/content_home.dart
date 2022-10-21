@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:prueba_a_kasa/ui/theme/theme.dart';
 
 import '../btn_continue.dart';
@@ -65,6 +66,13 @@ class _ContentHomeState extends State<ContentHome> {
               onChanged: changeSlider,
             ),
             BtnContinuar(
+              onAction: () => GoRouter.of(context).go('/login'),
+              // () async {
+              //   print('object');
+              //   Provider.of<AppStateManager>(context, listen: false)
+              //       .login('mockUsername', 'mockPassword');
+              //   print('object 222');
+              // },
               text: 'Comenzar',
             ),
           ],
