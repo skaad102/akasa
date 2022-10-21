@@ -1,25 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prueba_a_kasa/services/bloc/btn_block_bloc.dart';
-import 'package:prueba_a_kasa/ui/pages/home.dart';
-import 'package:prueba_a_kasa/ui/pages/login.dart';
+import 'package:provider/provider.dart';
 import 'package:prueba_a_kasa/ui/theme/theme.dart';
+
+import 'router/app_router.dart';
+import 'ui/model/app_state_manager.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final theme = ThemeAKasa.light();
+  final _appStateManager = AppStateManager();
+  late AppRouter _appRouter;
+
+  @override
+  void initState() {
+    super.initState();
+    _appRouter = AppRouter(appStateManager: _appStateManager);
+    _appStateManager.initializeApp();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiProvider(
       providers: [
-        BlocProvider<BtnBlockBloc>(
-          create: (context) => BtnBlockBloc(),
-        ),
+        ChangeNotifierProvider(create: (context) => _appStateManager)
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        home: const HomePage(),
+        // home: Router(routerDelegate: _appRouter),
+        routeInformationProvider: _appRouter.router.routeInformationProvider,
+        routerDelegate: _appRouter.router.routerDelegate,
+        routeInformationParser: _appRouter.router.routeInformationParser,
         theme: theme,
       ),
     );
