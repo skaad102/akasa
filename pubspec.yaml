@@ -39,6 +39,7 @@ dependencies:
   go_router: ^4.5.0
   permission_handler: ^9.2.0
   speech_to_text: ^5.6.1
+  metooltip: ^0.0.7
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:metooltip/metooltip.dart';
 import 'package:prueba_a_kasa/ui/widget/btn_continue.dart';
+
+import 'toolTip/custom_tool_tip.dart';
 
 class FormularioAkasa extends StatelessWidget {
   String textAction;
@@ -10,9 +13,14 @@ class FormularioAkasa extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Text(
-            textAction,
-            style: Theme.of(context).textTheme.headline4,
+          MeTooltip(
+            height: 200,
+            preferOri: PreferOrientation.up,
+            // triangleColor: Color.fromARGB(255, 78, 47, 31),
+            message: 'Ingresa tu correo electrónico',
+            allOffset: 0,
+            child: Text("Crea tu cuenta"),
+            tooltipChild: _getTooltipChild,
           ),
           DatosFormulario(),
           BtnContinuar(
@@ -24,6 +32,25 @@ class FormularioAkasa extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  TooltipBase _getTooltipChild(DefTooltipType p) {
+    return CustomTooltip(
+      message: p.message,
+      height: p.height,
+      preferOri: p.preferOri,
+      allOffset: p.allOffset,
+      triangleColor: p.triangleColor,
+      padding: p.padding,
+      margin: p.margin,
+      decoration: p.decoration,
+      animation: p.animation,
+      textStyle: p.textStyle,
+      target: p.target,
+      entry: p.entry,
+      targetSize: p.targetSize,
+      customDismiss: p.customDismiss,
     );
   }
 }
