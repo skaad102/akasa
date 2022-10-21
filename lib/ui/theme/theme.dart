@@ -84,5 +84,18 @@ class ThemeAKasa {
           backgroundColor: btnPlay,
           foregroundColor: Colors.white,
         ),
+        colorScheme: const ColorScheme(
+            background: btnBackground,
+            primary: btnPlay,
+            secondary: btnBack,
+            surface: btnSpeak,
+            onBackground: btnBorderSpeak,
+            onPrimary: btnHear,
+            onSecondary: btnBorderHear,
+            onSurface: btnPerfil,
+            onError: btnBorderPerfil,
+            brightness: Brightness.light,
+            error: btnBack),
+        // You should set other properties too
       );
 }

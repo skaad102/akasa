@@ -15,7 +15,7 @@ class AppStateManager extends ChangeNotifier {
   /// It waits for 2 seconds and then sets the _initialized variable to true.
   /// This is just to simulate a loading screen.
   void initializeApp() {
-    Timer(const Duration(milliseconds: 2000), () {
+    Timer(const Duration(milliseconds: 2500), () {
       _initialized = true;
       notifyListeners();
     });
