@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 
+import '../../model/app_state_manager.dart';
 import '../../theme/theme.dart';
 import '../btn_actions.dart';
 
@@ -31,21 +33,10 @@ class RowBtnActions extends StatelessWidget {
         BtnAction(
           backgroundColor: ThemeAKasa.btnHear,
           textColor: ThemeAKasa.btnBorderHear,
-          textAction: "Te Escucho",
-          icon: Icons.mic,
-          onAction: () async {
-            final status = await Permission.microphone.request();
-            switch (status) {
-              case PermissionStatus.granted:
-                print("Te Escucho");
-                break;
-              case PermissionStatus.denied:
-              case PermissionStatus.permanentlyDenied:
-              case PermissionStatus.restricted:
-              case PermissionStatus.limited:
-                openAppSettings();
-            }
-          },
+          textAction: getIconTxt(context),
+          icon: getIconMic(context),
+          onAction: () =>
+              Provider.of<AppStateManager>(context, listen: false).toggleMic(),
         ),
         BtnAction(
           backgroundColor: ThemeAKasa.btnPerfil,
@@ -56,6 +47,18 @@ class RowBtnActions extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  IconData getIconMic(BuildContext context) {
+    final microOn = Provider.of<AppStateManager>(context).isMicOn;
+    if (microOn) return Icons.mic;
+    return Icons.mic_off;
+  }
+
+  String getIconTxt(BuildContext context) {
+    final microOn = Provider.of<AppStateManager>(context).isMicOn;
+    if (!microOn) return "Te Escucho";
+    return "No Escuchar";
   }
 
   void permiso() {

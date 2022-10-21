@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:prueba_a_kasa/ui/pages/home.dart';
 import 'package:prueba_a_kasa/ui/pages/login.dart';
 import 'package:prueba_a_kasa/ui/pages/splash_page.dart';
@@ -62,9 +63,7 @@ import '../ui/model/app_state_manager.dart';
 class AppRouter with ChangeNotifier {
   final AppStateManager appStateManager;
 
-  AppRouter({required this.appStateManager}) {
-    appStateManager.addListener(notifyListeners);
-  }
+  AppRouter({required this.appStateManager});
 
   @override
   void dispose() {
@@ -77,6 +76,11 @@ class AppRouter with ChangeNotifier {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
+          final inicio = Provider.of<AppStateManager>(context).isInitialized;
+          // final incio = AppStateManager().isInitialized;
+          if (!inicio) {
+            return const SplashPage();
+          }
           return const HomePage();
         },
       ),
