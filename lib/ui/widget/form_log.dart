@@ -14,13 +14,14 @@ class FormularioAkasa extends StatelessWidget {
       child: Column(
         children: [
           MeTooltip(
-            height: 150,
+            // height: 20,
             preferOri: PreferOrientation.up,
             // triangleColor: Color.fromARGB(255, 78, 47, 31),
-            message:
-                'Crear una cuenta es gratis y te permite acceder a más funciones',
             allOffset: 0,
-            child: Text("Crea tu cuenta"),
+            child: GestureDetector(
+              child: const Text("Crea tu cuenta"),
+              onDoubleTap: () {},
+            ),
             tooltipChild: _getTooltipChild,
           ),
           DatosFormulario(),

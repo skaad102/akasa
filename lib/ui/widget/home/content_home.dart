@@ -23,21 +23,24 @@ class _ContentHomeState extends State<ContentHome> {
         child: Column(
           children: [
             //
-            Container(
-              width: 140,
-              height: 140,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 3,
-                ),
-                image: DecorationImage(
-                  image: const AssetImage('assets/img/img1.png'),
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                    const Color.fromRGBO(0, 0, 0, 1).withOpacity(0.2),
-                    BlendMode.darken,
+            Semantics(
+              label: 'imagen',
+              child: Container(
+                width: 140,
+                height: 140,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 3,
+                  ),
+                  image: DecorationImage(
+                    image: const AssetImage('assets/img/img1.png'),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      const Color.fromRGBO(0, 0, 0, 1).withOpacity(0.2),
+                      BlendMode.darken,
+                    ),
                   ),
                 ),
               ),
@@ -47,11 +50,10 @@ class _ContentHomeState extends State<ContentHome> {
                 height: 110,
                 width: 110,
                 child: FittedBox(
-                  child: Semantics(
-                    label: 'Play button',
-                    button: true,
-                    child: FloatingActionButton(
-                      onPressed: () {},
+                  child: FloatingActionButton(
+                    onPressed: () {},
+                    child: Semantics(
+                      label: 'play',
                       child: const Icon(
                         Icons.play_arrow_rounded,
                         size: 32,
