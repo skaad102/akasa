@@ -47,11 +47,15 @@ class _ContentHomeState extends State<ContentHome> {
                 height: 110,
                 width: 110,
                 child: FittedBox(
-                  child: FloatingActionButton(
-                    onPressed: () {},
-                    child: const Icon(
-                      Icons.play_arrow_rounded,
-                      size: 32,
+                  child: Semantics(
+                    label: 'Play button',
+                    button: true,
+                    child: FloatingActionButton(
+                      onPressed: () {},
+                      child: const Icon(
+                        Icons.play_arrow_rounded,
+                        size: 32,
+                      ),
                     ),
                   ),
                 ),
