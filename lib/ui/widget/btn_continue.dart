@@ -6,15 +6,18 @@ class BtnContinuar extends StatelessWidget {
   final theme = ThemeAKasa.light();
   final double height;
   final String text;
+  final Function onAction;
 
-  BtnContinuar({super.key, this.height = 75, required this.text});
+  BtnContinuar(
+      {super.key,
+      this.height = 75,
+      required this.text,
+      required this.onAction});
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        //TODO: Implementar navegación
-      },
+    return GestureDetector(
+      onTap: () => onAction(),
       child: Container(
         width: 328,
         height: height,

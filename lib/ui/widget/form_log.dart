@@ -16,6 +16,9 @@ class FormularioAkasa extends StatelessWidget {
           ),
           DatosFormulario(),
           BtnContinuar(
+            onAction: () {
+              print("object");
+            },
             text: 'Continuar',
             height: 60,
           )
