@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:prueba_a_kasa/ui/pages/home.dart';
 import 'package:prueba_a_kasa/ui/pages/login.dart';
 import 'package:prueba_a_kasa/ui/pages/splash_page.dart';
+import 'package:prueba_a_kasa/ui/pages/welcome.dart';
 
 import '../ui/model/app_state_manager.dart';
 
@@ -77,7 +78,6 @@ class AppRouter with ChangeNotifier {
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
           final inicio = Provider.of<AppStateManager>(context).isInitialized;
-          // final incio = AppStateManager().isInitialized;
           if (!inicio) {
             return const SplashPage();
           }
@@ -90,6 +90,15 @@ class AppRouter with ChangeNotifier {
           return const LoginPage();
         },
       ),
+      GoRoute(
+          path: '/welcome',
+          builder: (BuildContext context, GoRouterState state) {
+            final log = Provider.of<AppStateManager>(context).isLoggedIn;
+            if (log) {
+              return const WelcomePage();
+            }
+            return const LoginPage();
+          }),
     ],
     // errorBuilder: (context, state) => ErrorScreen(state.error),
   );

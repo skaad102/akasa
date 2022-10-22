@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 // import 'package:speech_to_text/speech_to_text.dart' as stt;
 
@@ -41,8 +42,11 @@ class AppStateManager extends ChangeNotifier {
   ///   phone (String): The phone number of the user
   ///   pin (String): The user's pin
   void login(String phone, String pin) {
-    print({phone, pin});
-    notifyListeners();
+    if (phone == "1111111111" && pin == "1111") {
+      _loggedIn = true;
+      notifyListeners();
+      return;
+    }
   }
 
   /// The function sets the _loggedIn variable to false, sets the _initialized variable to false, sets the

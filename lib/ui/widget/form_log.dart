@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:metooltip/metooltip.dart';
 import 'package:provider/provider.dart';
 import 'package:prueba_a_kasa/ui/model/app_state_manager.dart';
@@ -12,6 +13,7 @@ class FormularioAkasa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppStateManager>(context);
     return Center(
       child: Column(
         children: [
@@ -28,9 +30,11 @@ class FormularioAkasa extends StatelessWidget {
           ),
           DatosFormulario(),
           BtnContinuar(
-            onAction: () {
-              print("object");
-            },
+            onAction: (() async {
+              /* awit validation */
+              appState.login("1111111111", "1111");
+              GoRouter.of(context).go('/welcome');
+            }),
             text: 'Continuar',
             height: 60,
           )
