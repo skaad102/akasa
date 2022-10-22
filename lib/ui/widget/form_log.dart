@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metooltip/metooltip.dart';
+import 'package:provider/provider.dart';
+import 'package:prueba_a_kasa/ui/model/app_state_manager.dart';
 import 'package:prueba_a_kasa/ui/widget/btn_continue.dart';
 
 import 'toolTip/custom_tool_tip.dart';
@@ -68,11 +70,13 @@ class DatosFormulario extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppStateManager>(context);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 18),
       child: Form(
           child: Column(children: [
         InputForm(
+          inputUser: appState.telefono,
           controlerInput: controlerInputTelefono,
           hintText: 'Número de Telefono',
           icon: Icons.phone_android_outlined,
@@ -80,6 +84,7 @@ class DatosFormulario extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         InputForm(
+            inputUser: appState.pin,
             controlerInput: controlerInputPin,
             hintText: 'PIN máximo 4 numeros',
             icon: Icons.lock,
@@ -90,23 +95,41 @@ class DatosFormulario extends StatelessWidget {
   }
 }
 
-class InputForm extends StatelessWidget {
+class InputForm extends StatefulWidget {
   final TextEditingController controlerInput;
   final String hintText;
   final IconData icon;
   final bool obscureText;
   final int maxLength;
+  final String inputUser;
   const InputForm({
     Key? key,
     required this.controlerInput,
     required this.hintText,
     required this.icon,
     required this.maxLength,
+    required this.inputUser,
     this.obscureText = false,
   }) : super(key: key);
 
   @override
+  State<InputForm> createState() => _InputFormState();
+}
+
+class _InputFormState extends State<InputForm> {
+  @override
   Widget build(BuildContext context) {
+    // final palabra = Provider.of<AppStateManager>(context,
+    //     listen: false); /* actulizar input  */
+    // widget.controlerInput.addListener(() {
+    //   setState(() {
+    //     widget.controlerInput.text = palabra.vozToText;
+    //   });
+    //   // palabra.setVozToText("");
+    // });
+    setState(() {
+      widget.controlerInput.text = widget.inputUser;
+    });
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
@@ -120,11 +143,11 @@ class InputForm extends StatelessWidget {
         // maxLength: maxLength,
         onChanged: (value) => print(value),
         keyboardType: TextInputType.number,
-        obscureText: obscureText,
-        controller: controlerInput,
+        obscureText: widget.obscureText,
+        controller: widget.controlerInput,
         decoration: InputDecoration(
-          icon: Icon(icon),
-          hintText: hintText,
+          icon: Icon(widget.icon),
+          hintText: widget.hintText,
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
         ),

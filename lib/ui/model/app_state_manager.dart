@@ -2,20 +2,24 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
+// import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class AppStateManager extends ChangeNotifier {
   bool _initialized = false;
   bool _loggedIn = false;
   bool _micOn = false;
   String _vozToText = "";
+  String _telefono = "";
+  String _pin = "";
 
-  late stt.SpeechToText _speech;
+  // late stt.SpeechToText _speech;
 
   bool get isInitialized => _initialized;
   bool get isLoggedIn => _loggedIn;
   bool get isMicOn => _micOn;
   String get vozToText => _vozToText;
+  String get telefono => _telefono;
+  String get pin => _pin;
 
   void setVozToText(String text) {
     _vozToText = text;
@@ -95,4 +99,45 @@ class AppStateManager extends ChangeNotifier {
 //       _speech.stop();
 //     }
 //   }
+
+  /// A function that splits the text into two parts, the phone number and the pin.
+  void splitText() {
+    /* telefono 11223344 contraseña 1123 */
+    List<String> wordsSpace = _vozToText.split(" ");
+    /* [telefono, 11223344, contraseña, 1123 ] */
+
+    /* telefono 311 558 25 95 contraseña 1123 */
+    List<String> wordsWord = _vozToText.split("contraseña");
+    /* [[telefono 311 558 25 95], [contraseña 1123]] */
+
+    if (wordsSpace.length == 4) {
+      wordsSpace.forEach((element) {
+        element.trim().replaceAll(" ", "");
+      });
+      _telefono = wordsSpace[1];
+      _pin = wordsSpace[3];
+      notifyListeners();
+      return;
+    }
+
+    if (wordsWord.length == 2) {
+      // wordsWord.forEach((element) {
+      //   element
+      //       .trim()
+      //       .replaceAll("telefono", "")
+      //       .replaceAll("teléfono", "")
+      //       .replaceAll(" ", "");
+      // });
+      _telefono = wordsWord[0]
+          .trim()
+          .replaceAll("telefono", "")
+          .replaceAll("teléfono", "")
+          .replaceAll(" ", "");
+      _pin = wordsWord[1].trim().replaceAll(" ", "");
+      notifyListeners();
+      return;
+    }
+
+    /* return error */
+  }
 }
