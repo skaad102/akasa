@@ -38,6 +38,7 @@ class _RowBtnActionsState extends State<RowBtnActions> {
           textAction: "Atrás",
           icon: Icons.play_arrow_rounded,
           onAction: () => context.go('/'),
+          msSemantic: "",
         ),
         BtnAction(
           backgroundColor: ThemeAKasa.btnSpeak,
@@ -45,6 +46,7 @@ class _RowBtnActionsState extends State<RowBtnActions> {
           textAction: "Leo por ti",
           icon: Icons.speaker,
           onAction: () => print("Leo por ti"),
+          msSemantic: "",
         ),
         BtnAction(
           backgroundColor: ThemeAKasa.btnHear,
@@ -52,6 +54,8 @@ class _RowBtnActionsState extends State<RowBtnActions> {
           textAction: getIconTxt(context),
           icon: getIconMic(context),
           onAction: () => listenToMe(appState.isMicOn, context),
+          msSemantic:
+              "Dí telefono seguido de tu número, posteriormente dí contraseña seguido de tu pin",
         ),
         BtnAction(
           backgroundColor: ThemeAKasa.btnPerfil,
@@ -59,6 +63,7 @@ class _RowBtnActionsState extends State<RowBtnActions> {
           textAction: "Perfil",
           icon: Icons.person,
           onAction: () => print("Perfil"),
+          msSemantic: "",
         ),
       ],
     );

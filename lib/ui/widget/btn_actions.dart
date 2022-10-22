@@ -7,6 +7,7 @@ class BtnAction extends StatelessWidget {
   Color textColor;
   IconData icon;
   Function onAction;
+  String msSemantic;
 
   BtnAction(
       {required this.textAction,
@@ -14,6 +15,7 @@ class BtnAction extends StatelessWidget {
       required this.textColor,
       required this.icon,
       required this.onAction,
+      required this.msSemantic,
       super.key});
 
   @override
@@ -21,36 +23,39 @@ class BtnAction extends StatelessWidget {
     return Semantics(
       button: true,
       enabled: true,
-      child: GestureDetector(
-        onTap: () => onAction(),
-        child: Column(children: [
-          Container(
-            width: 69,
-            height: 69,
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              borderRadius: BorderRadius.circular(100),
-              border: Border.all(
-                color: textColor,
-                width: 3,
+      child: Semantics(
+        label: msSemantic,
+        child: GestureDetector(
+          onTap: () => onAction(),
+          child: Column(children: [
+            Container(
+              width: 69,
+              height: 69,
+              decoration: BoxDecoration(
+                color: backgroundColor,
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(
+                  color: textColor,
+                  width: 3,
+                ),
+              ),
+              child: Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.rotationY(pi),
+                child: Icon(
+                  icon,
+                  color: textColor,
+                  size: 30,
+                ),
               ),
             ),
-            child: Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.rotationY(pi),
-              child: Icon(
-                icon,
-                color: textColor,
-                size: 30,
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            textAction,
-            style: Theme.of(context).textTheme.headline4,
-          )
-        ]),
+            const SizedBox(height: 8),
+            Text(
+              textAction,
+              style: Theme.of(context).textTheme.headline4,
+            )
+          ]),
+        ),
       ),
     );
   }
