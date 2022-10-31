@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 // import 'package:speech_to_text/speech_to_text.dart' as stt;
 
@@ -83,27 +82,6 @@ class AppStateManager extends ChangeNotifier {
     notifyListeners();
   }
 
-//   void _listen() async {
-//     String _lastWords = "";
-//     if (_micOn) {
-//       bool available = await _speech.initialize(
-//         onStatus: (val) => print('onStatus: $val'),
-//         onError: (val) => print('onError: $val'),
-//       );
-//       if (available) {
-//         _speech.listen(
-//           cancelOnError: true,
-//           onResult: (val) => () {
-//             _lastWords = val.recognizedWords;
-//             print({val, val.recognizedWords});
-//           },
-//         );
-//       }
-//     } else {
-//       _speech.stop();
-//     }
-//   }
-
   /// A function that splits the text into two parts, the phone number and the pin.
   void splitText() {
     /* telefono 11223344 contraseña 1123 */
@@ -143,5 +121,40 @@ class AppStateManager extends ChangeNotifier {
     }
 
     /* return error */
+  }
+}
+
+class ZonaGestosManager extends ChangeNotifier {
+  late Timer _timerOn;
+  bool _zoneGesture = false;
+  bool get zoneGesture => _zoneGesture;
+  Timer get timer => _timerOn;
+
+  void timerCancel() {
+    _timerOn.cancel();
+    notifyListeners();
+  }
+
+  /// _timerOn is a timer that is set to 3500 milliseconds. When the timer is finished, _zoneGesture is
+  /// set to false
+  void changeZoneGesture() {
+    _timerOn = Timer(
+      const Duration(milliseconds: 3500),
+      () {
+        _zoneGesture = false;
+      },
+    );
+    notifyListeners();
+  }
+
+  /// _timerOn is a Timer that waits 1200 milliseconds before setting _zoneGesture to true
+  void changeZoneGestureOff() {
+    _timerOn = Timer(
+      const Duration(milliseconds: 1200),
+      () {
+        _zoneGesture = true;
+      },
+    );
+    notifyListeners();
   }
 }
