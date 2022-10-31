@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:permission_handler/permission_handler.dart';
-// import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class AppStateManager extends ChangeNotifier {
   bool _initialized = false;
@@ -22,6 +21,7 @@ class AppStateManager extends ChangeNotifier {
   String get pin => _pin;
 
   void setVozToText(String text) {
+    //TODO : filtrar utilidades
     _vozToText = text;
     notifyListeners();
   }
