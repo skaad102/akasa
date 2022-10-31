@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:prueba_a_kasa/ui/theme/theme.dart';
 
-import '../../model/app_state_manager.dart';
+import '../../../services/provider/app_state_manager.dart';
 
 class ZonaGestos extends StatelessWidget {
   @override

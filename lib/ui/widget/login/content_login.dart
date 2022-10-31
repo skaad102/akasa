@@ -4,7 +4,7 @@ import 'package:prueba_a_kasa/ui/widget/form_log.dart';
 import 'package:prueba_a_kasa/ui/widget/login/gesture_zone.dart';
 import 'package:prueba_a_kasa/ui/widget/login/row_actions.dart';
 
-import '../../model/app_state_manager.dart';
+import '../../../services/provider/app_state_manager.dart';
 
 class ContentLogin extends StatelessWidget {
   const ContentLogin({super.key});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:prueba_a_kasa/router/router_page.dart';
 
-import '../model/app_state_manager.dart';
+import '../../services/provider/app_state_manager.dart';
 
 class SplashPage extends StatefulWidget {
   static MaterialPage page() {
