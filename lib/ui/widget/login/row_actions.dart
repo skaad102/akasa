@@ -78,11 +78,9 @@ class _RowBtnActionsState extends State<RowBtnActions> {
       bool available = await _spechText.initialize(
         // onStatus: (val) => print('onStatus: $val'),
         onStatus: (val) {
-          setState(() {
-            if (val == 'notListening' || val == 'done') {
-              appState.toggleMic();
-            }
-          });
+          if (val == 'notListening') {
+            appState.toggleMicOnOff();
+          }
         },
         onError: (val) => print('onError: $val'),
       );
