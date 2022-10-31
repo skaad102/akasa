@@ -6,6 +6,8 @@ class ThemeAKasa {
   static const Color btnPlay = Color(0xFF56b82c);
   static const Color btnZone = Color(0xFFf8ffea);
   static const Color btnBorderZone = Color(0xFF56b82c);
+  static const Color btnZoneOff = Color(0xFFfff4d2);
+  static const Color btnBorderZoneOff = Color(0xFFFFC300);
   static const Color btnBack = Color(0xFFff6f6f);
   static const Color btnBorderBack = Color(0xFFa61b1b);
   static const Color btnSpeak = Color(0xFFa2df30);
