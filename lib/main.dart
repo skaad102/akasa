@@ -15,6 +15,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final theme = ThemeAKasa.light();
   final _appStateManager = AppStateManager();
+  final _gestosManager = ZonaGestosManager();
   late AppRouter _appRouter;
 
   @override
@@ -28,7 +29,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => _appStateManager)
+        ChangeNotifierProvider(create: (context) => _appStateManager),
+        ChangeNotifierProvider(create: (context) => _gestosManager)
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
