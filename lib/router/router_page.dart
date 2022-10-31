@@ -4,4 +4,6 @@ class AkasaPage {
   static String register = '/register';
   static String splash = '/splash';
   static String welcome = '/welcome';
+  // static String cuenta = '/cuenta';
+  // static String info = '/info';
 }

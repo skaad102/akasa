@@ -6,7 +6,7 @@ import 'package:prueba_a_kasa/ui/pages/login.dart';
 import 'package:prueba_a_kasa/ui/pages/splash_page.dart';
 import 'package:prueba_a_kasa/ui/pages/welcome.dart';
 
-import '../ui/model/app_state_manager.dart';
+import '../services/provider/app_state_manager.dart';
 
 // class AppRouter extends RouterDelegate
 //     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
@@ -99,6 +99,8 @@ class AppRouter with ChangeNotifier {
             }
             return const LoginPage();
           }),
+      // GoRoute(path: '/cuenta', builder: (_, __) => const PageCuenta()),
+      // GoRoute(path: '/info', builder: (_, __) => const PageInfo())
     ],
     // errorBuilder: (context, state) => ErrorScreen(state.error),
   );
